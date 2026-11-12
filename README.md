@@ -16,6 +16,11 @@ The project tries to answer one question: **does every part of a voice agent nee
 
 ## Architecture
 
+![restaurant-voice-agent architecture: speech in (browser, FastAPI, faster-whisper), one agent turn (SQLite, Python tools, gpt-oss:20b, guards in code), speech out (Piper, reply audio, transfer to staff), with the measured results](docs/architecture.png)
+
+<details>
+<summary>Same diagram as text (Mermaid)</summary>
+
 ```mermaid
 flowchart TB
   caller([Caller]) -->|hold to talk| page[Browser page<br/>MediaRecorder]
@@ -40,6 +45,8 @@ flowchart TB
   tts -->|WAV| page
   guards -.->|transfer_to_staff| staff([Member of staff])
 ```
+
+</details>
 
 One turn is: audio in, transcript, at most six LLM calls with tools in between, guards on the final text, then speech out. The caller can interrupt: pressing the talk button stops playback and aborts the request in flight. On the server, a newer turn marks the older one as superseded, so its reply is dropped from the conversation history unless it already booked a table or transferred the call.
 

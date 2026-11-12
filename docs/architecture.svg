@@ -1,0 +1,111 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1266' viewBox='0 0 1920 1266' font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"><defs><linearGradient id='band' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#4f46e5'/><stop offset='0.55' stop-color='#9333ea'/><stop offset='1' stop-color='#db2777'/></linearGradient><filter id='sh' x='-10%' y='-10%' width='120%' height='130%'><feDropShadow dx='0' dy='3' stdDeviation='4' flood-color='#0f172a' flood-opacity='0.12'/></filter><marker id='a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#334155'/></marker></defs><rect width='1920' height='1266' fill='#ffffff'/><rect x='0' y='0' width='1920' height='150' fill='url(#band)'/>
+<text x='50' y='78' font-size='48' font-weight='800' fill='#ffffff' text-anchor='start'>restaurant-voice-agent: phone bookings, run locally</text>
+<text x='50' y='122' font-size='25' font-weight='500' fill='#f5f3ff' text-anchor='start'>Local speech-to-text, a tool-calling LLM, guards in code and local text-to-speech.</text>
+<text x='1870' y='122' font-size='23' font-weight='600' fill='#fce7f3' text-anchor='end'>github.com/msaad7777/restaurant-voice-agent</text>
+<rect x='50' y='190' width='1820' height='242' rx='22' fill='#eef2ff'/>
+<rect x='74' y='208' width='163' height='38' rx='19' fill='#4338ca'/>
+<text x='155' y='235' font-size='22' font-weight='700' fill='#ffffff' text-anchor='middle'>Speech in</text>
+<rect x='50' y='462' width='1820' height='242' rx='22' fill='#fdf4ff'/>
+<rect x='74' y='480' width='519' height='38' rx='19' fill='#a21caf'/>
+<text x='334' y='507' font-size='22' font-weight='700' fill='#ffffff' text-anchor='middle'>One agent turn (at most 6 LLM calls)</text>
+<rect x='50' y='734' width='1820' height='242' rx='22' fill='#ecfeff'/>
+<rect x='74' y='752' width='176' height='38' rx='19' fill='#0e7490'/>
+<text x='162' y='779' font-size='22' font-weight='700' fill='#ffffff' text-anchor='middle'>Speech out</text>
+<path d='M628,318 L684,318' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<path d='M1236,318 L1292,318' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<path d='M1568,398 L1568,447 L1188,447 L1188,528' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<rect x='1314' y='417' width='128' height='28' rx='14' fill='#ffffff' stroke='#cbd5e1'/>
+<text x='1378' y='437' font-size='18' font-weight='700' fill='#334155' text-anchor='middle'>transcript</text>
+<path d='M532,590 L476,590' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)' marker-start='url(#a)'/>
+<path d='M988,590 L932,590' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)' marker-start='url(#a)'/>
+<path d='M1388,590 L1444,590' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<path d='M1585,670 L1585,719 L352,719 L352,800' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<rect x='905' y='689' width='128' height='28' rx='14' fill='#ffffff' stroke='#cbd5e1'/>
+<text x='969' y='709' font-size='18' font-weight='700' fill='#334155' text-anchor='middle'>reply text</text>
+<path d='M628,862 L684,862' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)'/>
+<path d='M1703,670 L1703,719 L1703,719 L1703,800' stroke='#334155' stroke-width='3.5' fill='none' marker-end='url(#a)' stroke-dasharray='10 8'/>
+<g filter='url(#sh)'><rect x='80' y='260' width='544' height='138' rx='16' fill='#f8fafc' stroke='#475569' stroke-width='3'/></g>
+<path d='M80,276 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#475569'/>
+<text x='352' y='298' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Caller</text>
+<text x='352' y='348' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>holds to talk in</text>
+<text x='352' y='379' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>the browser page</text>
+<g filter='url(#sh)'><rect x='688' y='260' width='544' height='138' rx='16' fill='#eff6ff' stroke='#2563eb' stroke-width='3'/></g>
+<path d='M688,276 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#2563eb'/>
+<text x='960' y='298' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>FastAPI /api/turn</text>
+<text x='960' y='348' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>audio upload,</text>
+<text x='960' y='379' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>127.0.0.1 only</text>
+<g filter='url(#sh)'><rect x='1296' y='260' width='544' height='138' rx='16' fill='#f5f3ff' stroke='#7c3aed' stroke-width='3'/></g>
+<path d='M1296,276 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#7c3aed'/>
+<text x='1568' y='298' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>faster-whisper</text>
+<text x='1568' y='348' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>base.en, int8 on CPU,</text>
+<text x='1568' y='379' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>dish names as hotwords</text>
+<g filter='url(#sh)'><rect x='80' y='532' width='392' height='138' rx='16' fill='#f0fdfa' stroke='#0d9488' stroke-width='3'/></g>
+<path d='M80,548 a16,16 0 0 1 16,-16 h360 a16,16 0 0 1 16,16 v38 h-392 z' fill='#0d9488'/>
+<text x='276' y='570' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>SQLite</text>
+<text x='276' y='620' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>menu, allergens, hours,</text>
+<text x='276' y='651' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>tables, bookings</text>
+<g filter='url(#sh)'><rect x='536' y='532' width='392' height='138' rx='16' fill='#eff6ff' stroke='#2563eb' stroke-width='3'/></g>
+<path d='M536,548 a16,16 0 0 1 16,-16 h360 a16,16 0 0 1 16,16 v38 h-392 z' fill='#2563eb'/>
+<text x='732' y='570' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Tools in Python</text>
+<text x='732' y='620' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>6 tools the LLM calls;</text>
+<text x='732' y='651' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>“Sunday” parsed in code</text>
+<g filter='url(#sh)'><rect x='992' y='532' width='392' height='138' rx='16' fill='#f5f3ff' stroke='#7c3aed' stroke-width='3'/></g>
+<path d='M992,548 a16,16 0 0 1 16,-16 h360 a16,16 0 0 1 16,16 v38 h-392 z' fill='#7c3aed'/>
+<text x='1188' y='570' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>gpt-oss:20b</text>
+<text x='1188' y='620' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>via Ollama: picks tools,</text>
+<text x='1188' y='651' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>writes the reply</text>
+<g filter='url(#sh)'><rect x='1448' y='532' width='392' height='138' rx='16' fill='#fff7ed' stroke='#ea580c' stroke-width='3'/></g>
+<path d='M1448,548 a16,16 0 0 1 16,-16 h360 a16,16 0 0 1 16,16 v38 h-392 z' fill='#ea580c'/>
+<text x='1644' y='570' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Guards in code</text>
+<text x='1644' y='620' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>book only after “yes”,</text>
+<text x='1644' y='651' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>verified allergen words</text>
+<g filter='url(#sh)'><rect x='80' y='804' width='544' height='138' rx='16' fill='#f5f3ff' stroke='#7c3aed' stroke-width='3'/></g>
+<path d='M80,820 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#7c3aed'/>
+<text x='352' y='842' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Piper TTS</text>
+<text x='352' y='892' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>en_US-joe-medium,</text>
+<text x='352' y='923' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>local HTTP server</text>
+<g filter='url(#sh)'><rect x='688' y='804' width='544' height='138' rx='16' fill='#f0fdf4' stroke='#16a34a' stroke-width='3'/></g>
+<path d='M688,820 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#16a34a'/>
+<text x='960' y='842' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Reply audio</text>
+<text x='960' y='892' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>plays in the page;</text>
+<text x='960' y='923' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>the caller can cut in</text>
+<g filter='url(#sh)'><rect x='1296' y='804' width='544' height='138' rx='16' fill='#f0fdf4' stroke='#16a34a' stroke-width='3'/></g>
+<path d='M1296,820 a16,16 0 0 1 16,-16 h512 a16,16 0 0 1 16,16 v38 h-544 z' fill='#16a34a'/>
+<text x='1568' y='842' font-size='27' font-weight='800' fill='#ffffff' text-anchor='middle'>Member of staff</text>
+<text x='1568' y='892' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>transfer_to_staff, e.g.</text>
+<text x='1568' y='923' font-size='22' font-weight='500' fill='#334155' text-anchor='middle'>parties over 8</text>
+<text x='50' y='1020' font-size='26' font-weight='800' fill='#0f172a' text-anchor='start'>Measured</text>
+<text x='190' y='1020' font-size='21' font-weight='500' fill='#334155' text-anchor='start'>33 tuning + 16 held-out scripted calls. Numbers from the README.</text>
+<rect x='50' y='1040' width='345' height='120' rx='16' fill='#ffffff' stroke='#4f46e5' stroke-width='3'/>
+<rect x='50' y='1040' width='12' height='120' rx='6' fill='#4f46e5'/>
+<text x='228' y='1098' font-size='40' font-weight='800' fill='#4f46e5' text-anchor='middle'>31 / 33</text>
+<text x='228' y='1136' font-size='20' font-weight='600' fill='#334155' text-anchor='middle'>tuning calls, text</text>
+<rect x='419' y='1040' width='345' height='120' rx='16' fill='#ffffff' stroke='#9333ea' stroke-width='3'/>
+<rect x='419' y='1040' width='12' height='120' rx='6' fill='#9333ea'/>
+<text x='597' y='1098' font-size='40' font-weight='800' fill='#9333ea' text-anchor='middle'>16 / 16</text>
+<text x='597' y='1136' font-size='20' font-weight='600' fill='#334155' text-anchor='middle'>held-out calls, text</text>
+<rect x='788' y='1040' width='345' height='120' rx='16' fill='#ffffff' stroke='#db2777' stroke-width='3'/>
+<rect x='788' y='1040' width='12' height='120' rx='6' fill='#db2777'/>
+<text x='966' y='1098' font-size='40' font-weight='800' fill='#db2777' text-anchor='middle'>0</text>
+<text x='966' y='1136' font-size='20' font-weight='600' fill='#334155' text-anchor='middle'>bookings without a yes</text>
+<rect x='1156' y='1040' width='345' height='120' rx='16' fill='#ffffff' stroke='#ea580c' stroke-width='3'/>
+<rect x='1156' y='1040' width='12' height='120' rx='6' fill='#ea580c'/>
+<text x='1335' y='1098' font-size='40' font-weight='800' fill='#ea580c' text-anchor='middle'>13.4 %</text>
+<text x='1335' y='1136' font-size='20' font-weight='600' fill='#334155' text-anchor='middle'>speech-to-text WER</text>
+<rect x='1525' y='1040' width='345' height='120' rx='16' fill='#ffffff' stroke='#0d9488' stroke-width='3'/>
+<rect x='1525' y='1040' width='12' height='120' rx='6' fill='#0d9488'/>
+<text x='1704' y='1098' font-size='40' font-weight='800' fill='#0d9488' text-anchor='middle'>3.9 s</text>
+<text x='1704' y='1136' font-size='20' font-weight='600' fill='#334155' text-anchor='middle'>p50 speech end to reply</text>
+<rect x='50' y='1188' width='22' height='22' rx='5' fill='#475569'/>
+<text x='82' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Input</text>
+<rect x='170.0' y='1188' width='22' height='22' rx='5' fill='#2563eb'/>
+<text x='202' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Code</text>
+<rect x='279.2' y='1188' width='22' height='22' rx='5' fill='#7c3aed'/>
+<text x='311' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Model</text>
+<rect x='399.2' y='1188' width='22' height='22' rx='5' fill='#0d9488'/>
+<text x='431' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Data store</text>
+<rect x='573.2' y='1188' width='22' height='22' rx='5' fill='#ea580c'/>
+<text x='605' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Check / gate</text>
+<rect x='768.8000000000001' y='1188' width='22' height='22' rx='5' fill='#16a34a'/>
+<text x='801' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='start'>Output</text>
+<text x='1870' y='1206' font-size='20' font-weight='600' fill='#334155' text-anchor='end'>faster-whisper · Ollama · LangChain · FastAPI · SQLite · Piper</text></svg>
