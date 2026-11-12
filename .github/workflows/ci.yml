@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Unit tests (tools, guards, baseline; no models)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - run: uv run pytest -q
+      - name: rule baseline eval (deterministic, no models)
+        run: |
+          uv run python eval/run_eval.py text --agent rules --name ci_rules > /dev/null
+          python3 -c "import json; s=json.load(open('eval/results/ci_rules.json'))['summary']; print(s['task_completion']); assert s['task_completion'] >= 0.9"

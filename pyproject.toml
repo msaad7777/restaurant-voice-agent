@@ -1,0 +1,27 @@
+[project]
+name = "voice-agent"
+version = "0.1.0"
+description = "Local voice agent for a fictional restaurant: Whisper, tool-calling LLM with guards, Piper"
+readme = "README.md"
+authors = [
+    { name = "Mohammed Saad", email = "59375560+msaad7777@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "av>=11,<16",
+    "fastapi>=0.162.5",
+    "faster-whisper>=1.2.1",
+    "langchain-core>=1.8.0",
+    "langchain-ollama>=1.1.0",
+    "python-multipart>=0.0.33",
+    "uvicorn>=0.54.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]

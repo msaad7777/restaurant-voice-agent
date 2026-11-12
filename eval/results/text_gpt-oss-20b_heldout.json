@@ -1,0 +1,1295 @@
+{
+ "summary": {
+  "run": "text_gpt-oss-20b_heldout",
+  "set": "heldout",
+  "mode": "text",
+  "agent": "gpt-oss:20b",
+  "guards": true,
+  "stt": null,
+  "scenarios": 16,
+  "turns": 25,
+  "task_completion": 1.0,
+  "task_completion_except_name": 1.0,
+  "tool_call_recall": 1.0,
+  "unexpected_side_effects": 0,
+  "booked_without_confirmation": 0,
+  "must_not_say_violations": 0,
+  "handoff": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "agent_ms": {
+   "p50": 3338,
+   "p95": 4649,
+   "max": 4940
+  },
+  "guards_fired": {
+   "confirmation_gate": 1,
+   "allergen_sentences_dropped": 1,
+   "transfer_nudge": 1
+  },
+  "by_category": {
+   "allergen": "4/4",
+   "allergen_unverified": "1/1",
+   "booking": "3/3",
+   "booking_closed": "1/1",
+   "booking_full": "1/1",
+   "handoff": "2/2",
+   "hours": "1/1",
+   "interrupted": "1/1",
+   "menu": "1/1",
+   "tool_failure": "1/1"
+  },
+  "failed": [],
+  "wall_s": 84
+ },
+ "rows": [
+  {
+   "id": "HB1",
+   "category": "booking",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Hey there, could I grab a spot for 2 this coming Wednesday around eight thirty? It'd be under Nkechi.",
+     "heard": "Hey there, could I grab a spot for 2 this coming Wednesday around eight thirty? It'd be under Nkechi.",
+     "cut": null,
+     "reply": "Sure, I have you for 2 on Wednesday, November 18 at 8:30 pm. Shall I book that?",
+     "raw_reply": "Sure, I have you for 2 on Wednesday, November 18 at 8:30 pm. Shall I book that?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "Wednesday",
+        "party_size": 2,
+        "time": "8:30 pm"
+       },
+       "result": {
+        "available": true,
+        "date": "2026-11-18",
+        "weekday": "Wednesday",
+        "spoken": "Wednesday, November 18 at 8:30 pm",
+        "time": "20:30",
+        "party_size": 2
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 4649,
+      "llm": [
+       3197,
+       1450
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Perfect, yes.",
+     "heard": "Perfect, yes.",
+     "cut": null,
+     "reply": "Your table is booked for 2 on Wednesday, November 18 at 8:30 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "raw_reply": "Your table is booked for 2 on Wednesday, November 18 at 8:30 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "Wednesday",
+        "name": "Nkechi",
+        "party_size": 2,
+        "time": "8:30 pm"
+       },
+       "result": {
+        "created": true,
+        "code": "JR-1009",
+        "name": "Nkechi",
+        "party_size": 2,
+        "date": "2026-11-18",
+        "time": "20:30",
+        "spoken": "Wednesday, November 18 at 8:30 pm"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 3651,
+      "llm": [
+       1876,
+       1774
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HB2",
+   "category": "booking",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "We're a group of five, any chance of something tomorrow evening at 6?",
+     "heard": "We're a group of five, any chance of something tomorrow evening at 6?",
+     "cut": null,
+     "reply": "We have a table for you tomorrow at 6 pm. Shall I book that?",
+     "raw_reply": "We have a table for you tomorrow at 6 pm. Shall I book that?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "tomorrow",
+        "party_size": 5,
+        "time": "6 pm"
+       },
+       "result": {
+        "available": true,
+        "date": "2026-11-14",
+        "weekday": "Saturday",
+        "spoken": "tomorrow at 6 pm",
+        "time": "18:00",
+        "party_size": 5
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3499,
+      "llm": [
+       2317,
+       1182
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Brilliant. Surname is Fitzgerald.",
+     "heard": "Brilliant. Surname is Fitzgerald.",
+     "cut": null,
+     "reply": "Just to confirm: a table for five under Fitzgerald tomorrow at 6 pm. Shall I book that?",
+     "raw_reply": "Just to confirm: a table for five under Fitzgerald tomorrow at 6 pm. Shall I book that?",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "tomorrow",
+        "name": "Fitzgerald",
+        "party_size": 5,
+        "time": "6 pm"
+       },
+       "result": {
+        "created": false,
+        "reason": "needs_confirmation",
+        "next_step": "Read the details back and ask the caller to confirm before booking."
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [
+      "confirmation_gate"
+     ],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3046,
+      "llm": [
+       1811,
+       1234
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Yep, lock it in.",
+     "heard": "Yep, lock it in.",
+     "cut": null,
+     "reply": "Your table is booked for five under Fitzgerald tomorrow at 6 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "raw_reply": "Your table is booked for five under Fitzgerald tomorrow at 6 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "tomorrow",
+        "name": "Fitzgerald",
+        "party_size": 5,
+        "time": "6 pm"
+       },
+       "result": {
+        "created": true,
+        "code": "JR-1009",
+        "name": "Fitzgerald",
+        "party_size": 5,
+        "date": "2026-11-14",
+        "time": "18:00",
+        "spoken": "tomorrow at 6 pm"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 3084,
+      "llm": [
+       1572,
+       1512
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HB3",
+   "category": "booking",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Is there room for three of us this Saturday at half past six? It's for Olsen.",
+     "heard": "Is there room for three of us this Saturday at half past six? It's for Olsen.",
+     "cut": null,
+     "reply": "Yes, we have a table for three at 6:30 pm tomorrow. Shall I book that for Olsen?",
+     "raw_reply": "Yes, we have a table for three at 6:30 pm tomorrow. Shall I book that for Olsen?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "Saturday",
+        "party_size": 3,
+        "time": "6:30 pm"
+       },
+       "result": {
+        "available": true,
+        "date": "2026-11-14",
+        "weekday": "Saturday",
+        "spoken": "tomorrow at 6:30 pm",
+        "time": "18:30",
+        "party_size": 3
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3561,
+      "llm": [
+       2198,
+       1362
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Yes please.",
+     "heard": "Yes please.",
+     "cut": null,
+     "reply": "Your table is booked for Olsen, three people, tomorrow at 6:30 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "raw_reply": "Your table is booked for Olsen, three people, tomorrow at 6:30 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "Saturday",
+        "name": "Olsen",
+        "party_size": 3,
+        "time": "6:30 pm"
+       },
+       "result": {
+        "created": true,
+        "code": "JR-1009",
+        "name": "Olsen",
+        "party_size": 3,
+        "date": "2026-11-14",
+        "time": "18:30",
+        "spoken": "tomorrow at 6:30 pm"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 3995,
+      "llm": [
+       2321,
+       1673
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HB4",
+   "category": "booking_full",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 2,
+   "expected_tools_hit": 2,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Any tables for six tonight around 7:30? Name Bergstr\u00f6m.",
+     "heard": "Any tables for six tonight around 7:30? Name Bergstr\u00f6m.",
+     "cut": null,
+     "reply": "I'm sorry, but we're fully booked at 7:30 pm tonight. We can offer you 5:30 pm, 8:30 pm, or 9 pm. Which time would you prefer?",
+     "raw_reply": "I'm sorry, but we're fully booked at 7:30 pm tonight. We can offer you 5:30 pm, 8:30 pm, or 9 pm. Which time would you prefer?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "tonight",
+        "party_size": 6,
+        "time": "7:30 pm"
+       },
+       "result": {
+        "available": false,
+        "reason": "fully_booked",
+        "date": "2026-11-13",
+        "weekday": "Friday",
+        "spoken": "tonight at 7:30 pm",
+        "time": "19:30",
+        "party_size": 6,
+        "alternatives": [
+         "5:30 pm",
+         "8:30 pm",
+         "9 pm"
+        ]
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 4290,
+      "llm": [
+       1931,
+       2358
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "The half eight one, please.",
+     "heard": "The half eight one, please.",
+     "cut": null,
+     "reply": "Great, I have a table for six at 8:30 pm tonight. Shall I book that?",
+     "raw_reply": "Great, I have a table for six at 8:30 pm tonight. Shall I book that?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "tonight",
+        "party_size": 6,
+        "time": "8:30 pm"
+       },
+       "result": {
+        "available": true,
+        "date": "2026-11-13",
+        "weekday": "Friday",
+        "spoken": "tonight at 8:30 pm",
+        "time": "20:30",
+        "party_size": 6
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3688,
+      "llm": [
+       2440,
+       1248
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Yes.",
+     "heard": "Yes.",
+     "cut": null,
+     "reply": "Your table is booked for six at 8:30 pm tonight. Your confirmation code is JR-1009. Enjoy your meal!",
+     "raw_reply": "Your table is booked for six at 8:30 pm tonight. Your confirmation code is JR-1009. Enjoy your meal!",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "tonight",
+        "name": "Bergstr\u00f6m",
+        "party_size": 6,
+        "time": "8:30 pm"
+       },
+       "result": {
+        "created": true,
+        "code": "JR-1009",
+        "name": "Bergstr\u00f6m",
+        "party_size": 6,
+        "date": "2026-11-13",
+        "time": "20:30",
+        "spoken": "tonight at 8:30 pm"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 3451,
+      "llm": [
+       1904,
+       1547
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HB5",
+   "category": "booking_closed",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Can I book for Monday evening, four people at 7?",
+     "heard": "Can I book for Monday evening, four people at 7?",
+     "cut": null,
+     "reply": "I'm sorry, but we're closed on Monday evenings. I can offer you an alternative time.",
+     "raw_reply": "I'm sorry, but we're closed on Monday evenings. I can offer you an alternative time.",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "Monday",
+        "party_size": 4,
+        "time": "7"
+       },
+       "result": {
+        "available": false,
+        "reason": "closed",
+        "weekday": "Monday",
+        "date": "2026-11-16",
+        "time": "19:00",
+        "party_size": 4,
+        "heard_date": "Monday",
+        "heard_time": "7"
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3000,
+      "llm": [
+       1767,
+       1232
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HA1",
+   "category": "allergen",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Is there dairy in the calamari?",
+     "heard": "Is there dairy in the calamari?",
+     "cut": null,
+     "reply": "According to our verified allergen list, the Crispy Calamari does not contain milk or dairy.",
+     "raw_reply": "According to our verified allergen list, the Crispy Calamari does not contain milk or dairy.",
+     "tool_calls": [
+      {
+       "name": "check_allergen",
+       "args": {
+        "allergen": "milk",
+        "dish": "calamari"
+       },
+       "result": {
+        "status": "not_listed",
+        "dish": "Crispy Calamari",
+        "allergen": "milk",
+        "say": "According to our verified allergen list, the Crispy Calamari does not contain milk or dairy."
+       },
+       "ms": 2
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 2861,
+      "llm": [
+       1579,
+       1279
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HA2",
+   "category": "allergen",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "My wife can't have gluten, is the olive oil cake alright for her?",
+     "heard": "My wife can't have gluten, is the olive oil cake alright for her?",
+     "cut": null,
+     "reply": "Yes, the Olive Oil Cake contains gluten.",
+     "raw_reply": "Yes, the Olive Oil Cake contains gluten.",
+     "tool_calls": [
+      {
+       "name": "check_allergen",
+       "args": {
+        "allergen": "gluten",
+        "dish": "olive oil cake"
+       },
+       "result": {
+        "status": "contains",
+        "dish": "Olive Oil Cake",
+        "allergen": "gluten",
+        "say": "Yes, the Olive Oil Cake contains gluten."
+       },
+       "ms": 2
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 2509,
+      "llm": [
+       1708,
+       798
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HA3",
+   "category": "allergen",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Do the peanut noodles have soy in them?",
+     "heard": "Do the peanut noodles have soy in them?",
+     "cut": null,
+     "reply": "Yes, the Peanut Noodles with Tofu contains soy.",
+     "raw_reply": "Yes, the Peanut Noodles with Tofu contains soy.",
+     "tool_calls": [
+      {
+       "name": "check_allergen",
+       "args": {
+        "allergen": "soy",
+        "dish": "peanut noodles"
+       },
+       "result": {
+        "status": "contains",
+        "dish": "Peanut Noodles with Tofu",
+        "allergen": "soy",
+        "say": "Yes, the Peanut Noodles with Tofu contains soy."
+       },
+       "ms": 2
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3092,
+      "llm": [
+       2137,
+       952
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HA4",
+   "category": "allergen_unverified",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Could you tell me if the sorbet has any egg?",
+     "heard": "Could you tell me if the sorbet has any egg?",
+     "cut": null,
+     "reply": "I'm sorry, I can't confirm that for you right now. I can't confirm allergens for the Sorbet of the Day, because its allergen information hasn't been verified. I can connect you with a member of staff who can check with the kitchen. Would you like me to do that?",
+     "raw_reply": "I'm sorry, I can't confirm that for you right now. I can transfer you to a staff member who can check the allergen information. Would you like me to do that?",
+     "tool_calls": [
+      {
+       "name": "check_allergen",
+       "args": {
+        "allergen": "egg",
+        "dish": "sorbet"
+       },
+       "result": {
+        "status": "unverified",
+        "dish": "Sorbet of the Day",
+        "allergen": "egg",
+        "next_step": "If the caller needs certainty or a guarantee, call transfer_to_staff.",
+        "say": "I can't confirm allergens for the Sorbet of the Day, because its allergen information hasn't been verified. I can connect you with a member of staff who can check with the kitchen."
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [
+      "allergen_sentences_dropped:1"
+     ],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 4149,
+      "llm": [
+       2142,
+       2004
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HA5",
+   "category": "allergen",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Allergic to sesame here, what about the charred carrots?",
+     "heard": "Allergic to sesame here, what about the charred carrots?",
+     "cut": null,
+     "reply": "Yes, the Charred Carrots contains sesame.",
+     "raw_reply": "Yes, the Charred Carrots contains sesame.",
+     "tool_calls": [
+      {
+       "name": "check_allergen",
+       "args": {
+        "allergen": "sesame",
+        "dish": "charred carrots"
+       },
+       "result": {
+        "status": "contains",
+        "dish": "Charred Carrots",
+        "allergen": "sesame",
+        "say": "Yes, the Charred Carrots contains sesame."
+       },
+       "ms": 2
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3044,
+      "llm": [
+       2204,
+       837
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HH1",
+   "category": "hours",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "When do you open on Saturday?",
+     "heard": "When do you open on Saturday?",
+     "cut": null,
+     "reply": "We open at 5:00 pm and close at 11:00 pm on Saturday.",
+     "raw_reply": "We open at 5:00 pm and close at 11:00 pm on Saturday.",
+     "tool_calls": [
+      {
+       "name": "get_hours",
+       "args": {
+        "date": "Saturday"
+       },
+       "result": {
+        "date": "2026-11-14",
+        "weekday": "Saturday",
+        "open": true,
+        "opens": "17:00",
+        "closes": "23:00",
+        "last_booking": "21:30"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 2488,
+      "llm": [
+       1229,
+       1258
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HH2",
+   "category": "menu",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "What desserts have you got?",
+     "heard": "What desserts have you got?",
+     "cut": null,
+     "reply": "We have a Flourless Chocolate Torte, an Olive Oil Cake, and a Sorbet of the Day.",
+     "raw_reply": "We have a Flourless Chocolate Torte, an Olive Oil Cake, and a Sorbet of the Day.",
+     "tool_calls": [
+      {
+       "name": "search_menu",
+       "args": {
+        "category": "dessert",
+        "dietary": "",
+        "query": ""
+       },
+       "result": {
+        "dishes": [
+         {
+          "name": "Flourless Chocolate Torte",
+          "category": "dessert",
+          "price": 12.0,
+          "description": "Dark chocolate and almond torte with cr\u00e8me fra\u00eeche.",
+          "tags": [
+           "vegetarian"
+          ]
+         },
+         {
+          "name": "Olive Oil Cake",
+          "category": "dessert",
+          "price": 10.0,
+          "description": "Citrus olive oil cake.",
+          "tags": [
+           "vegetarian"
+          ]
+         },
+         {
+          "name": "Sorbet of the Day",
+          "category": "dessert",
+          "price": 8.0,
+          "description": "Flavour changes daily.",
+          "tags": [
+           "vegan"
+          ]
+         }
+        ],
+        "count": 3
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3165,
+      "llm": [
+       1637,
+       1527
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HX1",
+   "category": "handoff",
+   "expected_handoff": true,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": true,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "I'd like to talk to someone about hosting a birthday party for twenty people.",
+     "heard": "I'd like to talk to someone about hosting a birthday party for twenty people.",
+     "cut": null,
+     "reply": "You're being transferred to a staff member now. Thank you.",
+     "raw_reply": "You're being transferred to a staff member now. Thank you.",
+     "tool_calls": [
+      {
+       "name": "transfer_to_staff",
+       "args": {
+        "reason": "party over 8"
+       },
+       "result": {
+        "transferred": true,
+        "reason": "party_over_8_or_private_event"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [
+      "transfer_nudge"
+     ],
+     "handoff": true,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 4940,
+      "llm": [
+       1751,
+       2152,
+       1036
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HX2",
+   "category": "handoff",
+   "expected_handoff": true,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": true,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Get me a real person, please.",
+     "heard": "Get me a real person, please.",
+     "cut": null,
+     "reply": "Sure, I'll connect you to a staff member right away.",
+     "raw_reply": "Sure, I'll connect you to a staff member right away.",
+     "tool_calls": [
+      {
+       "name": "transfer_to_staff",
+       "args": {
+        "reason": "caller asking for a person"
+       },
+       "result": {
+        "transferred": true,
+        "reason": "caller_asked_for_a_person"
+       },
+       "ms": 1
+      }
+     ],
+     "guards": [],
+     "handoff": true,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 2553,
+      "llm": [
+       1573,
+       979
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HF1",
+   "category": "tool_failure",
+   "expected_handoff": null,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": true,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Book me in for two tomorrow at 7, name Ruiz.",
+     "heard": "Book me in for two tomorrow at 7, name Ruiz.",
+     "cut": null,
+     "reply": "I'm sorry, I can't check that right now. Would you like me to transfer you to a staff member?",
+     "raw_reply": "I'm sorry, I can't check that right now. Would you like me to transfer you to a staff member?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "tomorrow",
+        "party_size": 2,
+        "time": "7 pm"
+       },
+       "result": {
+        "error": "tool_unavailable",
+        "detail": "check_availability is temporarily unavailable"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3732,
+      "llm": [
+       2260,
+       1472
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Yes.",
+     "heard": "Yes.",
+     "cut": null,
+     "reply": "You are being transferred to a staff member now. Have a great day!",
+     "raw_reply": "You are being transferred to a staff member now. Have a great day!",
+     "tool_calls": [
+      {
+       "name": "transfer_to_staff",
+       "args": {
+        "reason": "caller requested transfer"
+       },
+       "result": {
+        "transferred": true,
+        "reason": "caller_accepted_transfer_offer"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": true,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 2261,
+      "llm": [
+       1172,
+       1088
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "HI1",
+   "category": "interrupted",
+   "expected_handoff": false,
+   "task_complete": true,
+   "task_complete_except_name": true,
+   "reservation_ok": true,
+   "handoff": false,
+   "handoff_ok": true,
+   "must_say_ok": true,
+   "must_not_say_hits": [],
+   "cut_turn_side_effect": false,
+   "expected_tools": 1,
+   "expected_tools_hit": 1,
+   "unexpected_side_effects": [],
+   "booked_without_confirmation": 0,
+   "turns": [
+    {
+     "said": "Could I get a",
+     "heard": "Could I get a",
+     "cut": 0.4,
+     "reply": "Sure, what can I help you with?",
+     "raw_reply": "Sure, what can I help you with?",
+     "tool_calls": [],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 1110,
+      "llm": [
+       1109
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Sorry, a table for four on Sunday at six, name Jansen.",
+     "heard": "Sorry, a table for four on Sunday at six, name Jansen.",
+     "cut": null,
+     "reply": "Your table for four on Sunday, November 15 at 6 pm is available. Shall I book that?",
+     "raw_reply": "Your table for four on Sunday, November 15 at 6 pm is available. Shall I book that?",
+     "tool_calls": [
+      {
+       "name": "check_availability",
+       "args": {
+        "date": "Sunday",
+        "party_size": 4,
+        "time": "6:00 pm"
+       },
+       "result": {
+        "available": true,
+        "date": "2026-11-15",
+        "weekday": "Sunday",
+        "spoken": "Sunday, November 15 at 6 pm",
+        "time": "18:00",
+        "party_size": 4
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": true,
+     "ms": {
+      "stt": 0,
+      "agent": 3338,
+      "llm": [
+       2046,
+       1291
+      ],
+      "tts": 0
+     }
+    },
+    {
+     "said": "Yes.",
+     "heard": "Yes.",
+     "cut": null,
+     "reply": "Your table is booked for Sunday, November 15 at 6 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "raw_reply": "Your table is booked for Sunday, November 15 at 6 pm. Your confirmation code is JR-1009. Enjoy your meal!",
+     "tool_calls": [
+      {
+       "name": "create_reservation",
+       "args": {
+        "date": "Sunday",
+        "name": "Jansen",
+        "party_size": 4,
+        "time": "6:00 pm"
+       },
+       "result": {
+        "created": true,
+        "code": "JR-1009",
+        "name": "Jansen",
+        "party_size": 4,
+        "date": "2026-11-15",
+        "time": "18:00",
+        "spoken": "Sunday, November 15 at 6 pm"
+       },
+       "ms": 0
+      }
+     ],
+     "guards": [],
+     "handoff": false,
+     "unconfirmed": false,
+     "ms": {
+      "stt": 0,
+      "agent": 3384,
+      "llm": [
+       1825,
+       1558
+      ],
+      "tts": 0
+     }
+    }
+   ]
+  }
+ ]
+}

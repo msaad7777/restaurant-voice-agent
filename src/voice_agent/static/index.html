@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juniper and Rye voice agent</title>
+<style>
+  :root { --bg:#f7f5f0; --fg:#1d1b18; --muted:#6b665d; --card:#fff; --accent:#2f5d50; --line:#ddd7cc; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#151412; --fg:#ece8e1; --muted:#a39d92; --card:#1f1d1a; --accent:#7fb8a5; --line:#34312c; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:24px 16px; }
+  h1 { font-size:1.4rem; margin:0 0 4px; }
+  p.sub { color:var(--muted); margin:0 0 20px; }
+  .controls { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  button { font:inherit; padding:10px 16px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+  button.primary { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  button.rec { background:#b3261e; color:#fff; border-color:#b3261e; }
+  button:disabled { opacity:.5; cursor:default; }
+  form { display:flex; gap:8px; margin-bottom:16px; }
+  input { flex:1; font:inherit; padding:10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); }
+  .msg { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin:8px 0; }
+  .who { font-size:.8rem; color:var(--muted); }
+  details { font-size:.85rem; color:var(--muted); margin-top:6px; }
+  pre { white-space:pre-wrap; word-break:break-word; margin:4px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Juniper and Rye</h1>
+  <p class="sub">A fictional restaurant's phone host. Local models only. Hold the button to talk; press it again while the agent is speaking to interrupt.</p>
+  <div class="controls">
+    <button id="start" class="primary">Start call</button>
+    <button id="talk" disabled>Hold to talk</button>
+  </div>
+  <form id="textform"><input id="text" placeholder="Or type what the caller says" disabled><button id="send" disabled>Send</button></form>
+  <div id="log"></div>
+</main>
+<script>
+let callId = null, recorder = null, chunks = [], player = null, inflight = null;
+const $ = id => document.getElementById(id);
+
+function add(who, text, extra) {
+  const d = document.createElement('div'); d.className = 'msg';
+  d.innerHTML = `<div class="who"></div><div class="t"></div>`;
+  d.querySelector('.who').textContent = who; d.querySelector('.t').textContent = text;
+  if (extra) { const x = document.createElement('details'); x.innerHTML = '<summary>tools, guards, timings</summary><pre></pre>';
+    x.querySelector('pre').textContent = JSON.stringify(extra, null, 2); d.appendChild(x); }
+  $('log').prepend(d);
+}
+function play(b64) {
+  stopAudio();
+  if (!b64) return;
+  player = new Audio('data:audio/wav;base64,' + b64); player.play();
+}
+function stopAudio() { if (player) { player.pause(); player = null; } }
+
+$('start').onclick = async () => {
+  const r = await (await fetch('/api/call', {method: 'POST'})).json();
+  callId = r.call_id; $('log').innerHTML = ''; add('Agent', r.reply); play(r.audio);
+  for (const id of ['talk', 'text', 'send']) $(id).disabled = false;
+};
+
+async function sendTurn(fd) {
+  if (inflight) inflight.abort();          // barge-in: drop the old request
+  inflight = new AbortController();
+  fd.append('call_id', callId);
+  try {
+    const r = await (await fetch('/api/turn', {method: 'POST', body: fd, signal: inflight.signal})).json();
+    add('Caller (heard as)', r.transcript || '(nothing)');
+    add('Agent', r.reply, {tool_calls: r.tool_calls, guards: r.guards, timings_ms: r.timings_ms});
+    play(r.audio);
+    if (r.handoff) for (const id of ['talk', 'text', 'send']) $(id).disabled = true;
+  } catch (e) { if (e.name !== 'AbortError') add('Error', String(e)); }
+}
+
+$('textform').onsubmit = e => {
+  e.preventDefault(); const t = $('text').value.trim(); if (!t) return;
+  $('text').value = ''; const fd = new FormData(); fd.append('text', t); stopAudio(); sendTurn(fd);
+};
+
+async function startRec() {
+  stopAudio();                              // barge-in: stop the agent talking
+  const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+  recorder = new MediaRecorder(stream); chunks = [];
+  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.onstop = () => { stream.getTracks().forEach(t => t.stop());
+    const fd = new FormData(); fd.append('audio', new Blob(chunks, {type: recorder.mimeType}), 'turn.webm'); sendTurn(fd); };
+  recorder.start(); $('talk').className = 'rec'; $('talk').textContent = 'Listening… release to send';
+}
+function stopRec() { if (recorder && recorder.state === 'recording') recorder.stop(); $('talk').className = ''; $('talk').textContent = 'Hold to talk'; }
+$('talk').onpointerdown = startRec; $('talk').onpointerup = stopRec; $('talk').onpointerleave = stopRec;
+</script>
+</body>
+</html>
