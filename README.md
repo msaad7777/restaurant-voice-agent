@@ -229,9 +229,10 @@ ollama pull gpt-oss:20b          # about 13 GB
 uv run pytest -q                 # 18 unit tests, no models needed
 ```
 
-Download the two Piper voices into `voices/` (each needs its `.onnx` and `.onnx.json` file) from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US), then start Piper in one terminal:
+Download the two Piper voices from [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US) into `voices/`, then start Piper in one terminal:
 
 ```bash
+./scripts/get-voices.sh          # about 140 MB, once
 ./scripts/piper.sh               # http://127.0.0.1:5100
 ```
 

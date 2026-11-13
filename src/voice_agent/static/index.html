@@ -22,6 +22,11 @@
   .who { font-size:.8rem; color:var(--muted); }
   details { font-size:.85rem; color:var(--muted); margin-top:6px; }
   pre { white-space:pre-wrap; word-break:break-word; margin:4px 0 0; }
+  .controls { align-items:center; }
+  #meter { width:120px; height:8px; border-radius:4px; background:var(--line); overflow:hidden; }
+  #meter > div { height:100%; width:0; background:var(--accent); transition:width 60ms; }
+  #status { color:var(--muted); font-size:.9rem; min-height:1.4em; margin:-8px 0 12px; }
+  #status.warn { color:#b3261e; }
 </style>
 </head>
 <body>
@@ -31,12 +36,15 @@
   <div class="controls">
     <button id="start" class="primary">Start call</button>
     <button id="talk" disabled>Hold to talk</button>
+    <div id="meter" title="microphone level"><div></div></div>
   </div>
+  <div id="status" role="status"></div>
   <form id="textform"><input id="text" placeholder="Or type what the caller says" disabled><button id="send" disabled>Send</button></form>
   <div id="log"></div>
 </main>
 <script>
 let callId = null, recorder = null, chunks = [], player = null, inflight = null;
+let holding = false, peak = 0, recStart = 0, levelTimer = null, audioCtx = null;
 const $ = id => document.getElementById(id);
 
 function add(who, text, extra) {
@@ -67,6 +75,7 @@ async function sendTurn(fd) {
   try {
     const r = await (await fetch('/api/turn', {method: 'POST', body: fd, signal: inflight.signal})).json();
     add('Caller (heard as)', r.transcript || '(nothing)');
+    if (!r.transcript && fd.has('audio')) status('Speech-to-text heard no words in that recording. Try speaking closer to the microphone.', true);
     add('Agent', r.reply, {tool_calls: r.tool_calls, guards: r.guards, timings_ms: r.timings_ms});
     play(r.audio);
     if (r.handoff) for (const id of ['talk', 'text', 'send']) $(id).disabled = true;
@@ -78,17 +87,56 @@ $('textform').onsubmit = e => {
   $('text').value = ''; const fd = new FormData(); fd.append('text', t); stopAudio(); sendTurn(fd);
 };
 
-async function startRec() {
+function status(msg, warn) { $('status').textContent = msg || ''; $('status').className = warn ? 'warn' : ''; }
+
+async function startRec(e) {
+  if (e) e.preventDefault();
   stopAudio();                              // barge-in: stop the agent talking
-  const stream = await navigator.mediaDevices.getUserMedia({audio: true});
-  recorder = new MediaRecorder(stream); chunks = [];
+  holding = true; status('');
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({audio: true});
+  } catch (err) {
+    holding = false;
+    status('The microphone is blocked (' + err.name + '). Allow it for this page, or type below.', true);
+    return;
+  }
+  if (!holding) {                           // released before the microphone was ready
+    stream.getTracks().forEach(t => t.stop());
+    status('Hold the button down while you speak.', true);
+    return;
+  }
+  // level meter: shows the caller that sound is arriving, and catches a silent microphone
+  audioCtx = audioCtx || new AudioContext();
+  const analyser = audioCtx.createAnalyser(); audioCtx.createMediaStreamSource(stream).connect(analyser);
+  const buf = new Float32Array(analyser.fftSize); peak = 0;
+  levelTimer = setInterval(() => {
+    analyser.getFloatTimeDomainData(buf); let p = 0; for (const v of buf) p = Math.max(p, Math.abs(v));
+    peak = Math.max(peak, p); $('meter').firstElementChild.style.width = Math.min(100, p * 250) + '%';
+  }, 60);
+  recorder = new MediaRecorder(stream); chunks = []; recStart = performance.now();
   recorder.ondataavailable = e => chunks.push(e.data);
-  recorder.onstop = () => { stream.getTracks().forEach(t => t.stop());
-    const fd = new FormData(); fd.append('audio', new Blob(chunks, {type: recorder.mimeType}), 'turn.webm'); sendTurn(fd); };
+  recorder.onstop = () => {
+    stream.getTracks().forEach(t => t.stop()); clearInterval(levelTimer); $('meter').firstElementChild.style.width = '0';
+    const ms = performance.now() - recStart;
+    if (ms < 400) { status('That was too short. Hold the button down while you speak.', true); return; }
+    if (peak < 0.01) {
+      status('No sound reached the microphone. On a Mac, check System Settings > Privacy & Security > ' +
+             'Microphone for this browser, and the input device in Sound settings. You can also type below.', true);
+      return;
+    }
+    status('Sent ' + (ms / 1000).toFixed(1) + ' s of audio.');
+    const fd = new FormData(); fd.append('audio', new Blob(chunks, {type: recorder.mimeType}), 'turn.webm'); sendTurn(fd);
+  };
   recorder.start(); $('talk').className = 'rec'; $('talk').textContent = 'Listening… release to send';
 }
-function stopRec() { if (recorder && recorder.state === 'recording') recorder.stop(); $('talk').className = ''; $('talk').textContent = 'Hold to talk'; }
+function stopRec() {
+  holding = false;
+  if (recorder && recorder.state === 'recording') recorder.stop();
+  $('talk').className = ''; $('talk').textContent = 'Hold to talk';
+}
 $('talk').onpointerdown = startRec; $('talk').onpointerup = stopRec; $('talk').onpointerleave = stopRec;
+$('talk').onpointercancel = stopRec;
 </script>
 </body>
 </html>
