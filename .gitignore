@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 eval/results/*.log
+
+# Written by `make check` (the CI rule-baseline eval)
+eval/results/ci_rules.json
